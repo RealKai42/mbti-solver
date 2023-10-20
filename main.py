@@ -32,7 +32,9 @@ st.markdown("""
 > 本网站只是为了测试和娱乐，不允许用于商业用途，所有的内容都不能当作真实的，未成年人请勿使用。请各位用户理性对待，保持娱乐的心态，不要依赖或深信其结果。  
 > 为保证可用性和成本限制，每次只能提问**一个问题**，请谨慎提问   
             
-🥺 试试作者的 [其他作品](https://kaiyi.cool)
+🥺   
+试试作者的 [其他作品](https://kaiyi.cool)   
+玩的开心记得点个 star 呀 [网站源代码](https://github.com/RealKai42/mbti-solver)         
 """)
 
 if "disable_input" not in st.session_state:
@@ -89,4 +91,8 @@ if submitted and mbti and action and question:
     add_message("assistant", response.choices[0].message.content)
     time.sleep(0.1)
 
-    add_message("assistant", """感谢使用，🥺 试试作者的 [其他作品](https://kaiyi.cool) """, 0.01)
+    add_message("assistant", """感谢使用，   
+                🥺    
+试试作者的 [其他作品](https://kaiyi.cool)   
+玩的开心记得点个 star 呀 [网站源代码](https://github.com/RealKai42/mbti-solver)     
+                """, 0.01)
