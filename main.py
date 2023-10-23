@@ -61,7 +61,7 @@ with st.form("my_form"):
 
     submitted = st.form_submit_button("Submit", on_click=disable())
 
-if submitted  and action and question:
+if submitted and mbti and action and question:
     with st.spinner('加载解读中，请稍等 ......'):
         if action == '情感支持':
             system_prompt = """你是一个共情能力非常强的心理医生，并且很了解MBTI（迈尔斯-布里格斯性格类型指标)的各种人格类型，你的任务是根据来访者的 MBTI 和问题，给出针对性的情感支持，你的回答要富有感情、有深度和充足的情感支持，引导来访者乐观积极面对问题"""
