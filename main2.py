@@ -55,7 +55,7 @@ def add_message(role, content, delay=0.05):
         message_placeholder.markdown(full_response)
 
 with st.form("my_form"):
-    mbti = st.selectbox('请输入您的类型', mbti_upper, disabled=st.session_state.disable_input)
+    # mbti = st.selectbox('请输入您的类型', mbti_upper, disabled=st.session_state.disable_input)
     action = st.selectbox('请问您需要',['情感支持', '解决方案'], disabled=st.session_state.disable_input)
     question = st.text_input('请输入您的疑问', disabled=st.session_state.disable_input)
 
@@ -63,19 +63,21 @@ with st.form("my_form"):
 
 if submitted  and action and question:
     with st.spinner('加载解读中，请稍等 ......'):
+        fixed_text = "作为一名专业的MBTI（迈尔斯-布里格斯性格类型指标）心理医生，你的任务是根据来访者的性格类型和特点给出建议，你首先根据问题猜测来访者的 MBTI，并告诉来访者，然后根据这种性格类型的特点解答问题"
         if action == '情感支持':
-            system_prompt = """你是一个共情能力非常强的心理医生，并且很了解MBTI（迈尔斯-布里格斯性格类型指标)的各种人格类型，你的任务是根据来访者的 MBTI 和问题，给出针对性的情感支持，你的回答要富有感情、有深度和充足的情感支持，引导来访者乐观积极面对问题"""
+            variable_text = "主要提供情感支持，关注来访者的情绪需求，而不只是解决问题。"
         else:
-            system_prompt = """你是一个专业的心理医生，并且很了解MBTI（迈尔斯-布里格斯性格类型指标)的各种人格类型，你的任务是根据来访者的 MBTI 和问题，给出针对性的解决方案，你的回答要专业、有深度，同时富有情感价值，能够引导来访者积极面对问题"""
+            variable_text = "在主要提供解决方案的同时，也要注意给予来访者适当的情感支持。"
+        ending_text = "你的回答需要专业、有深度，同时富有情感价值，能够引导来访者积极面对问题。"
+        prompt = f"{fixed_text} {variable_text} {ending_text}"
 
-        desc = mbti_desc[mbti.lower()]
+        # desc = mbti_desc[mbti.lower()]
 
         response = openai.ChatCompletion.create(
             engine="gpt35",
-            messages = [{"role":"system","content":system_prompt},
+            messages = [{"role":"system","content":prompt},
                         {"role":"user","content":f"""
-                        我的性格类型是：{mbti},
-                        这种类型的性格特点是:{desc},
+       
                         我遇到问题是:{question}"""},
                         ],
             temperature=0.7,
