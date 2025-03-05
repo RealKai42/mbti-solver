@@ -70,7 +70,7 @@ if submitted and mbti and action and question:
         desc = mbti_desc[mbti.lower()]
 
         response = openai.ChatCompletion.create(
-            engine="gpt35",
+            engine="gpt-4o-mini",
             messages = [{"role":"system","content":system_prompt},
                         {"role":"user","content":f"""
                         我的性格类型是：{mbti},
